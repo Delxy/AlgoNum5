@@ -1,9 +1,11 @@
-import numpy as np
+# -*- coding: utf-8 -*-
 from __future__ import division
+import numpy as np
 
 
 
-#calcule les dérivées en certains points du tableau de fonction fourni en entré
+
+#calcule les dérivées en certains points du tableau de fonction fourni en entrée
 #retourne un tableau 
 def derivation(y,eps):
     n = y.shape
@@ -20,7 +22,7 @@ def integration(f,a,b,n):
     h = (b - a)/n
     res = 0
     for i in range(1,n):
-        res = res + f[a + k*h]
+        res = res + f[a + i*h]
 
     return h*res
 
@@ -37,3 +39,10 @@ def longueur(y,a,b,integ,n):
         
         
         
+## tests
+n = 4
+g = np.array([1,2,3])
+a = 0
+b = 1
+tab = integration(g,a,b,n)
+print tab
