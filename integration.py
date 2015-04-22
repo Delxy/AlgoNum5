@@ -21,7 +21,7 @@ def derivation(y,eps):
 def integration(f,a,b,n):
     h = (b - a)/n
     res = 0
-    for i in range(1,n):
+    for i in range(0,n):
         res = res + f[a + i*h]
 
     return h*res
@@ -32,10 +32,10 @@ def integration(f,a,b,n):
 #integ designe une méthode d'intégration passée en paramètre
 def longueur(y,a,b,integ,n):
     f = derivation(y,eps)
-    for i in range(0,y.shape[0] - 1):
-        f[i] = np.sqrt(1 + tab[i]**2)
-    tab = integration(f,a,b,n)
-    return tab
+    for i in range(0,y.shape[1] - 1):
+        f[i] = np.sqrt(1 + f[i]**2)
+    res = integration(f,a,b,n)
+    return res 
         
         
         
