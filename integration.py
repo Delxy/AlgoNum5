@@ -5,8 +5,8 @@ import numpy as np
 
 
 
-#calcule les dérivées en certains points du tableau de fonction fourni en entrée
-#retourne un tableau 
+### Calcule les dérivées en certains points du tableau de fonction fourni en entrée
+# retourne un tableau 
 def derivation(y,eps):
     n = y.shape
     deriv_val = np.array(n)
@@ -15,10 +15,15 @@ def derivation(y,eps):
     return deriv_val
 
 
-#intègre une fonction f sur [a,b] selon la subdivision n , en utilisant la méthode globale des rectangles à droite
-#Attention la subdivision utilisée doit être régulière
+###### Methodes d'integration disponibles pour les tests #####
 
-def integration(f,a,b,n):
+
+#1# méthode globale des rectangles à droite
+
+# intègre une fonction f sur [a,b] selon la subdivision n , en utilisant la 
+# Attention la subdivision utilisée doit être régulière
+
+def integration_globale_a_droite(f,a,b,n):
     h = (b - a)/n
     res = 0
     for i in range(0,n):
@@ -28,9 +33,17 @@ def integration(f,a,b,n):
 
 
 
-#calcule la longueur de l'arc donné par la courbe de la fonction f sur [a,b]
+
+#2# Methode du point milieu
+
+#3# Methode rectangle à gauche
+
+
+
+#### Calcul de la longueur de l'arc donné par la courbe de la fonction f sur [a,b]
+
 #integ designe une méthode d'intégration passée en paramètre
-def longueur(y,a,b,integ,n):
+def longueur(y,a,b,n):
     f = derivation(y,eps)
     for i in range(0,y.shape[1] - 1):
         f[i] = np.sqrt(1 + f[i]**2)
@@ -44,5 +57,11 @@ n = 4
 g = np.array([1,2,3])
 a = 0
 b = 1
-tab = integration(g,a,b,n)
+tab = integration_globale_a_droite(g,a,b,n)
 print tab
+
+
+## tests longueur arc sur fonction constante
+
+f = np.array([3,3,3,3,3,3,3,3,3])
+print integration_globale_a_droite(f,0,1,10)
