@@ -5,6 +5,8 @@
 \usepackage{mathtools}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{setspace}
+\doublespacing
 
 %%%%%%%%%%%%%%%% Lengths %%%%%%%%%%%%%%%%
 \setlength{\textwidth}{15.5cm}
@@ -49,7 +51,7 @@
 \section*{Airfoil refinment}
 This first part was aimed at refining the airfoil, consisting of a list of points, into a sufficently smooth curve. An airfoil is separated into two parts : the upper surface and the lower surface. First, an airfoil profile was arbitrarily selected from de UIUC database, and loaded as arrays of points, using a python function provided beforehand (load\_foil).\\
 
-The $ex$ and $ey$ returned by this function are arrays containing only one integer each, namely the number of points in the upper surface and in the lower surface. A separation function had then to be implemented, in order to separate the different arrays, in order to obtain two distinct curves (one for the upper surface, another for the lower one).\\
+The variables returned by this function correspond to the abscissas and ordinates of the points of both the upper surface ($ex$ and $ey$) and the lower surface ($ix$ and $iy$). Those datas, stored in arrays (as previously stated), were exploited to draw the curves describing the airfoil.\\
 
 Those curves had then to be sufficiently smoothed, in order to be properly used and easily integrated. This was achieved through cubic spline interpolation : a piecewise-polynomial curve joins the points of a given set, such that each polynomial equation between each point is at most of order 3, and such that the continuity, the first and the second derivative of the overall curve is preserved.\\
 
@@ -91,7 +93,7 @@ In the case of the upper right corner, the approximation of the integral is give
 \end{equation*}
 
 \section*{Modelling the airflow}
-After having drawn the shape of the airfoil and calculated the length of its curve, the goal of the last part was to model the behaviour of the airflow above and below the wing, following a laminar model.\\
+After having drawn the shape of the airfoil and calculated the length of its curve, the goal of the last part was to model the behaviour of the airflow above and below the wing, following a laminar model, and to draw a pressure map of the air around the wing.\\
 
 The modelling of the airflow was computed following the instructions : \\
 Every slice is given by the following function :
@@ -110,5 +112,5 @@ In our example, $h_{max} \approx 0.10$ and $h_{min} \approx -0.04$, and 20 slice
 
 Finally, in order to draw the pressure map of the air above and below the wing, a matrix containing the values of the pressure at each point had to be computed, using the formula given in the instructions (the Bernoulli law). The pressure is indeed proportional to the speed squared. Moreover, on each slice of the laminar flow, the pressure is equal on every point of the slice. For example, on every point of the slice closest to the upper side of the airfoil, the pressure is equal and maximal.\\
 This is where the length of the curve calculated in the previous section comes into use : the speed is calculated by computing the length of each slice, represented by the aforementioned $f_{\lambda}$ functions.\\
-At the moment, the pressure map is not properly drawn in our program.
+At the moment, the pressure map is not properly drawn in our program yet.
 \end{document}
