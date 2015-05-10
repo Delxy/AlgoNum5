@@ -2,7 +2,10 @@
 from __future__ import division
 import numpy as np
 
-
+## ------- Part 2 ------##
+# Computing the length of the curve:
+# The aim is to calculate the length of the curve by integrating a function in an interval with a given step h
+# We worked in three steps: computing the derivation, then three integration methods, and finally computing the lentgh thanks to the formula
 
 
 
@@ -16,13 +19,8 @@ def derivation(f, a, b, n,eps):
         deriv_value[i] = (f(deriv_value[i] + eps) - f(deriv_value[i])) / eps
     return deriv_value
 
-
-def derivation_1(f, x, eps):
-    return (f(x + eps) - f(x)) / eps
-
-#1# méthode globale des rectangles à droite
-def integration_globale_a_droite(f,a,b):
-    """ This function 'intègre' the array in ouput in range [a,b].The output is a number."""
+def right_rectangle_rule(f,a,b):
+    """ Computes the global right rectangle rule. This function takes the array in ouput in range [a,b].The output is a number."""
     n = f.shape[0]
     h = (b - a)/n
     res = 0
@@ -30,8 +28,8 @@ def integration_globale_a_droite(f,a,b):
         res = res + f[a + i*h]
     return h*res
 
-#2# Methode du point milieu
-def simpson(f,a,b):
+def simpson_rule(f,a,b):
+    """Computes the middle point rule"""
     n = f.shape[0]
     h = (b - a)/n
     
@@ -41,9 +39,9 @@ def simpson(f,a,b):
         som = som + f[a + i*h]/3 +2*f[a + i*h + h/2]/3
 
     return h*(res + som)
-    
-#3# Methode des trapèzes
-def trapeze(f,a,b):
+
+def trapezoidal_rule(f,a,b):
+    """ Computes the trapezoidal rule: takes in input: a function f computed by an array, and two bounds a and b """
     n = f.shape[0]
     h = (b - a)/n
 
@@ -54,28 +52,30 @@ def trapeze(f,a,b):
     return res*h
 
 
-def longueur(integ_methode,f,a,b,n):
-    """ It computes the length of the curve f between a and b. n change the accuracy."""
+def curve_length(integ_method,f,a,b,n):
+    """ It computes the length of the curve f between a and b. n (subdivision) changes the accuracy."""
     deriv = derivation(f, a, b, n, 0.001) # It contains the derivative array of f.
     for i in np.arange(0, deriv.shape[0]): # Then we use the formula to compute the length of a curve
         deriv[i] = np.sqrt(1 + deriv[i]**2)
-    res = integ_methode(deriv,a,b) # To conclude we 'intègrons'
+    res = integ_method(deriv,a,b) # integration using the method chosen in parameter
     return res
 
-# exemple d'utilisation 
+
 
 
 if __name__ == '__main__':
+    print("Integration testing")
     def f(x):
-        return x
+        return x 
+    assert(abs(curve_length(right_rectangle_rule,f,0,1,1000) - np.sqrt(2)) < 0.01)
+    assert(abs(curve_length(trapezoidal_rule,f,0,1,1000) - np.sqrt(2)) < 0.01)
+    assert(abs(curve_length(simpson_rule,f,0,1,1000) - np.sqrt(2)) < 0.01)
     
-    out = longueur(integration_globale_a_droite,f,0,1,10000)
-    print out
-        
-    out = longueur(trapeze,f,0,1,10000)
-    print out
-
-    out = longueur(simpson,f,0,1,10000)
-    print out
+    def f(x):
+        return 2
+    assert(abs(curve_length(right_rectangle_rule,f,0,1,1000) - 1) < 0.01)
+    assert(abs(curve_length(trapezoidal_rule,f,0,1,1000) - 1) < 0.01)
+    assert(abs(curve_length(simpson_rule,f,0,1,1000) - 1) < 0.01)
+    print("Integration testing done")
 
         

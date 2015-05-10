@@ -49,7 +49,7 @@ def pressure_map(filename,nb_slice,integ_methode):
         # We compute the size of each slice
         f = f_lambda(j, f_upper, h_max)
         
-        size = part2.longueur(integ_methode,f, 0, 1, 10)
+        size = part2.curve_length(integ_methode,f, 0, 1, 10)
 
         # Then we put this value in each point of the airflow.
         for x in range(0, matrix_length):
@@ -58,7 +58,7 @@ def pressure_map(filename,nb_slice,integ_methode):
 
         # INTRADOS
         f = f_lambda(j, f_lower, h_min)
-        size = part2.longueur(integ_methode,f, 0, 1, 10)
+        size = part2.curve_length(integ_methode,f, 0, 1, 10)
 
         for x in range(0, matrix_length):    
             res = f(x_values[x])
@@ -72,5 +72,5 @@ def pressure_map(filename,nb_slice,integ_methode):
 
     
 if __name__ == '__main__':
-    pressure_map("DU84132V.DAT.txt", 100, part2.integration_globale_a_droite)
-    pressure_map("HS1606.DAT", 100, part2.integration_globale_a_droite)
+    pressure_map("DU84132V.DAT.txt", 250, part2.right_rectangle_rule)
+    pressure_map("HS1606.DAT", 250, part2.right_rectangle_rule)
