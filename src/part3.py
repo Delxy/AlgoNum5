@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import part1 as part1
 import integration as itg
-import affichage as aff
 
 
 def f_lambda(L, f, min_or_max):
@@ -67,7 +66,7 @@ def pressure_map(filename,nb_slice,integ_methode):
 
     
     # Then the slice are displayed and the pressure map afterward.
-    aff.display(ex, ey, ix, iy)
+    part1.display(ex, ey, ix, iy)
     plt.imshow(np.transpose(matrix), interpolation = 'nearest')
     plt.show()
 
