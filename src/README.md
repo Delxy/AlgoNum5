@@ -10,7 +10,7 @@ First, the sources are splitted in 3 files:
        	 /!/ The airfoil file must contain ONLY data about extrados and intrados. Sometimes there is two line which make the parser load_foil unefficienly.
 
 
-Students: Alice Milliet
+Students: Alice Millier
 	  Romain Petro
 	  Henri Toussaint
 	  Clara Broc
