@@ -2,8 +2,8 @@
 from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
-import part1 as part1
-import integration as itg
+import part1
+import part2 
 
 
 def f_lambda(L, f, min_or_max):
@@ -49,7 +49,7 @@ def pressure_map(filename,nb_slice,integ_methode):
         # We compute the size of each slice
         f = f_lambda(j, f_upper, h_max)
         
-        size = itg.longueur(integ_methode,f, 0, 1, 10)
+        size = part2.longueur(integ_methode,f, 0, 1, 10)
 
         # Then we put this value in each point of the airflow.
         for x in range(0, matrix_length):
@@ -58,19 +58,19 @@ def pressure_map(filename,nb_slice,integ_methode):
 
         # INTRADOS
         f = f_lambda(j, f_lower, h_min)
-        size = itg.longueur(integ_methode,f, 0, 1, 10)
+        size = part2.longueur(integ_methode,f, 0, 1, 10)
 
         for x in range(0, matrix_length):    
             res = f(x_values[x])
             matrix[x, transfer(res, h_max, h_min, accuracy)] = 500*(size**2)
 
     
-    # Then the slice are displayed and the pressure map afterward.
+    # Then the curve is displayed and the pressure map afterward.
     part1.display(ex, ey, ix, iy)
     plt.imshow(np.transpose(matrix), interpolation = 'nearest')
     plt.show()
 
     
-
-pressure_map("DU84132V.DAT.txt", 100, itg.integration_globale_a_droite)
-#pressure_map("HS1606.DAT", 100, itg.integration_globale_a_droite)
+if __name__ == '__main__':
+    pressure_map("DU84132V.DAT.txt", 100, part2.integration_globale_a_droite)
+    pressure_map("HS1606.DAT", 100, part2.integration_globale_a_droite)

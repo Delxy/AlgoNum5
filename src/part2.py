@@ -67,15 +67,15 @@ def longueur(integ_methode,f,a,b,n):
 
 if __name__ == '__main__':
     def f(x):
-        return np.log(x)
+        return x
     
-        out = longueur(integration_globale_a_droite,f,1,30,10)
-        print out
+    out = longueur(integration_globale_a_droite,f,0,1,10000)
+    print out
         
-        out = longueur(trapeze,f,1,30,10)
-        print out
+    out = longueur(trapeze,f,0,1,10000)
+    print out
 
-        out = longueur(simpson,f,1,30,10)
-        print out
+    out = longueur(simpson,f,0,1,10000)
+    print out
 
         
