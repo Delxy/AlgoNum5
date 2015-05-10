@@ -29,7 +29,7 @@ def right_rectangle_rule(f,a,b):
     return h*res
 
 def simpson_rule(f,a,b):
-    """Computes the middle point rule"""
+    """Computes the simpson rule"""
     n = f.shape[0]
     h = (b - a)/n
     
@@ -41,7 +41,7 @@ def simpson_rule(f,a,b):
     return h*(res + som)
 
 def trapezoidal_rule(f,a,b):
-    """ Computes the trapezoidal rule: takes in input: a function f computed by an array, and two bounds a and b """
+    """ Computes the trapezoidal rule: takes in input a function f represented by an array, and two bounds a and b """
     n = f.shape[0]
     h = (b - a)/n
 
@@ -53,7 +53,7 @@ def trapezoidal_rule(f,a,b):
 
 
 def curve_length(integ_method,f,a,b,n):
-    """ It computes the length of the curve f between a and b. n (subdivision) changes the accuracy."""
+    """ Computes the length of the curve f between a and b. n (subdivision) changes the accuracy."""
     deriv = derivation(f, a, b, n, 0.001) # It contains the derivative array of f.
     for i in np.arange(0, deriv.shape[0]): # Then we use the formula to compute the length of a curve
         deriv[i] = np.sqrt(1 + deriv[i]**2)
